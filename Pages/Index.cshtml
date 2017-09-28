@@ -1,20 +1,33 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
+
 
 <form method="POST" name="aForm">
 
-<textarea asp-for="Messages"  rows=6 cols="20">
-    this is content
-</textarea>
-    <input type="submit" value="Submit">
+<input type="checkbox" asp-for="SimpleCheckBox"> 
+
+<label asp-for="SimpleCheckBox">Simple CheckBox</label>
+
+<textarea asp-for="Messages"  rows="6" cols="20" style="width:100%"></textarea> <br/>
+
+<input type="submit" value="Submit">
 
 </form>
 
-TextArea Content Should show:<br/>
+TextArea Content Should show:  @Model.Messages
 
-@Model.Messages
+@section Scripts {
 
+    <script type="text/javascript">
 
+        $("#SimpleCheckBox").on('change', OnChange_SimpleCheckBox);
+
+        // Give some  UX feedback on changes to SimpleCheckBox
+        function OnChange_SimpleCheckBox() {
+
+            var changeMessage = 'OnClick: SimpleCheckBox: ' + $('#SimpleCheckBox').is(':checked');
+            $('#Messages').val(changeMessage);
+        }
+
+    </script>
+}
